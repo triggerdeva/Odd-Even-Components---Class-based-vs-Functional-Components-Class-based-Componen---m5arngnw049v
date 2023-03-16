@@ -1,47 +1,31 @@
 import React from 'react'
 import '../styles/App.css';
 
-class Odd extends React.Component {
-
-  render() {
-    return (
-      <div id="odd">
-        I am odd
-      </div>
-    )
-  }
-}
-
-class Even extends React.Component {
-
-  render() {
-    return (
-      <div id="even">
-        I am even
-      </div>
-    )
-  }
-}
-class App extends React.Component {
-  handleChange(){
-    this.setState({even: !this.state.even})
+class App extends React.Component{
+  
+  handleClick(){
+    if(this.state.flag){
+      this.setState({count: this.state.count + 2,flag:false});
+    }
+    else this.setState({flag:true});
   }
   constructor(props){
     super(props)
-    this.state = {even: true}
-    this.handleChange =  this.handleChange.bind(this)
+    this.state = {count:0,flag:false}
+    this.handleClick = this.handleClick.bind(this)
   }
-  render() {
-    return (
-      <div id="main">
-        {this.state.even ? <Even /> : <Odd />}
 
-        <button id="toggle" onClick={this.handleChange}>Change</button>
+
+  render(){
+    {!this.state.flag && console.log(`Rendering with count:-${this.state.count}`)};
+    return(
+      <div>
+        <span id="count">{this.state.count}</span>
+        <button id="incr-btn" onClick={this.handleClick}>Increment</button>
       </div>
     )
+
   }
-
 }
-
 
 export default App;
